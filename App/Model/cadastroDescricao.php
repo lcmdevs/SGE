@@ -6,30 +6,33 @@ include_once '../../lib/Database/Conection.php';
 $conn = new Conexao();
 $conn->conectar();
 
-$modelo = $_POST['Modelo'];
+$descri = $_POST['descricao'];
 
 if ($modelo != null) {
 
   global $pdo;
-  $sql = $pdo->prepare("SELECT * FROM modelo WHERE NOME_MODELO = :modelo");
-  $sql->BindValue(":modelo", $modelo);
+  $sql = $pdo->prepare("SELECT * FROM descri WHERE DESC_DESCRICAO = :descri");
+  $sql->BindValue(":descri", $descri);
   $sql->execute();
 
   if ($sql->rowCount() == 0) {
 
     global $pdo;
-    $sql = $pdo->prepare("INSERT INTO modelo(NOME_MODELO) VALUES (:modelo)");
-    $sql->BindValue(":modelo", $modelo);
+    $sql = $pdo->prepare("INSERT INTO descri(DESC_DESCRICAO) VALUES (:descri)");
+    $sql->BindValue(":descri", $descri);
     $sql->execute();
 
     if ($sql->execute()) {
 
       $_SESSION['sucesso'] = "cadastro realizado";
       header("Location: ");
+
+
     } else {
 
       $_SESSION['falha'] = "sql não realizado";
       header("Location: ");
+
     }
   } else {
 
