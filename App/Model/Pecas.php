@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 class Pecas
 
 {
 
-	public static function selecPk(){
+	public static function selecPk()
+	{
 
 		$con = Connetion::getConn();
 
@@ -15,20 +16,20 @@ class Pecas
 		$resultado = array();
 
 		while ($row = $sql->fetchObject()) {
-			$resultado[] =$row;
+			$resultado[] = $row;
 		}
 
 		if (!$resultado) {
 			throw new Exception("Não foi encontrado resgistro");
-			
 		}
 		return $resultado;
 	}
 
 
-	public static function insert($dadosPecas){
+	public static function insert($dadosPecas)
+	{
 
-		if(empty($dadosPecas['NomeCor'])){	
+		if (empty($dadosPecas['NomeCor'])) {
 
 			echo "<div class='alert alert-success'>Preencha todos os Campos
 			<a href='//localhost/SGE/?pagina=admin&metodo=armario' class='nav-link'>
@@ -46,34 +47,28 @@ class Pecas
 		$sql->bindValue(":corr", $dadosPecas['NomeCor']);
 		$sql->execute();
 
-		if($sql->rowCount($sql) > 0 ){
+		if ($sql->rowCount($sql) > 0) {
 			return false;
-		}else{
-		// $sql = 'INSERT INTO pecas_cor (cor) VALUES (:corr)';
+		} else {
+			// $sql = 'INSERT INTO pecas_cor (cor) VALUES (:corr)';
 
-		$sql = $con->prepare('INSERT INTO cor_pecas (cor) VALUES (:corr)');
-		$sql->bindValue(':corr', $dadosPecas['NomeCor']);
-		$result = $sql->execute();
+			$sql = $con->prepare('INSERT INTO cor_pecas (cor) VALUES (:corr)');
+			$sql->bindValue(':corr', $dadosPecas['NomeCor']);
+			$result = $sql->execute();
 
-		return true;
-
+			return true;
 		}
 
-		if ($result == 0 ) {
+		if ($result == 0) {
 			throw new Exception("<div class='alrte alert-primary'> Não foi possivel fazer o cadastrado </div>");
 
 			return false;
 		}
 
-			return true;
+		return true;
 
 		echo "<div class='alert alert-primary'> Material cadastrado!</div>";
 		header("Location: http://localhost/SGE/?pagina=admin&metodo=armario");
 		// var_dump($result);
 	}
-
 }
-
-
-
-?>

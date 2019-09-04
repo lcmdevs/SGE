@@ -5,10 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "name": "Launch currently open script",
+      "type": "php",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${file}"
-    }
+      "program": "${file}",
+      "cwd": "",
+      "port": 9000,
+    },
+    {
+      "name": "Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9000,
+    },
+  
   ]
 }

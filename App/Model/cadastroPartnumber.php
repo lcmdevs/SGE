@@ -8,41 +8,34 @@ $conn->conectar();
 
 $partNumber = $_POST['partNumber'];
 
-if ($modelo != null) {
+if ($partNumber != null) {
 
   global $pdo;
-  $sql = $pdo->prepare("SELECT * FROM partnumber WHERE NUM_PARTNUMBER = :partnumber");
+  $sql = $pdo->prepare("SELECT * FROM partnumber WHERE NUM_PARTNUMBER = :partNumber");
   $sql->BindValue(":partNumber", $partNumber);
   $sql->execute();
 
   if ($sql->rowCount() == 0) {
 
     global $pdo;
-    $sql = $pdo->prepare("INSERT INTO partnumber(NUM_PARTNUMBER) VALUES (:partNumber)");
+    $sql = $pdo->prepare("INSERT INTO partnumber(NUM_PARTNUMBER) VALUE (:partNumber)");
     $sql->BindValue(":partNumber", $partNumber);
     $sql->execute();
 
-    if ($sql->execute()) {
+    if ($sql) {
 
       $_SESSION['sucesso'] = "cadastro realizado";
-      header("Location: ");
-
-      
     } else {
 
       $_SESSION['falha'] = "sql não realizado";
-      header("Location: ");
-
     }
   } else {
 
     $_SESSION['falha'] = "este modelo já está cadastrado";
-    header("Location: ");
-
   }
 } else {
 
   $_SESSION['falha'] = "O campo modelo está vazio";
-  header("Location: ");
-
 }
+
+header("Location: ../../?pagina=admin&metodo=partnamber");
