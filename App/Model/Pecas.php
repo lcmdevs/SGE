@@ -31,11 +31,11 @@ class Pecas
 		if(empty($dadosPecas['NomeCor'])){	
 
 			echo "<div class='alert alert-success'>Preencha todos os Campos
-			<a href='//localhost/Daniel/?pagina=admin&metodo=armario' class='nav-link'>
+			<a href='//localhost/SGE/?pagina=admin&metodo=armario' class='nav-link'>
 			Tente Novamente!
 			</a>
 			</div>";
-			// header("Location: http://localhost/Daniel/?pagina=admin&metodo=armario");
+			// header("Location: http://localhost//?pagina=admin&metodo=armario");
 
 			return false;
 		}
@@ -68,7 +68,7 @@ class Pecas
 			return true;
 
 		echo "<div class='alert alert-primary'> Material cadastrado!</div>";
-		header("Location: http://localhost/Daniel/?pagina=admin&metodo=armario");
+		header("Location: http://localhost/SGE/?pagina=admin&metodo=armario");
 		// var_dump($result);
 	}
 

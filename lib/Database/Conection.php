@@ -1,21 +1,23 @@
 <?php
 
 
-	abstract class connection
+class Conexao
+{
+
+	private $pdo;
+	public $msgErro = "";
+
+	public function conectar()
 	{
-		private static $conn;
-
-		public static function getConn()
-		{
-			if (self::$conn == null) {
-				self:: $conn = new PDO('mysql: host=localhost; dbname=sge;','root','');
-			}
-
-			return self::$conn;
+		global $pdo;
+		$dbname = "sge";
+		$servidor = "localhost";
+		$usuario = "root";
+		$senha = "";
+		try {
+			$pdo = new PDO("mysql:dbname=" . $dbname . ";servidor=" . $servidor, $usuario, $senha);
+		} catch (PDOException $e) {
+			$e->getMessage();
 		}
-
 	}
-
-
-
-?>
+}
